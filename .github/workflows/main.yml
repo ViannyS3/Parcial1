@@ -1,0 +1,23 @@
+name: Deploy to Surge
+
+on:
+  push:
+    branches:
+      - main  # o la rama que prefieras
+
+jobs:
+  deploy:
+    runs-on: windows
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: npm install
+     
+
+    - name: Deploy to Surge
+      env:
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      run: surge ./ --domain https://stereotyped-throat.surge.sh
