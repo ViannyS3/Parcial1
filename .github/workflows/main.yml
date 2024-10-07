@@ -1,23 +1,29 @@
-name: Despliegue a surge.sh
+name: Deploy to Surge
 
 on:
   push:
     branches:
-      - main  # Triggers on push to the main branch
+      - main  # o la rama que prefieras
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout the code
       uses: actions/checkout@v3
+
+    - name: configura nodejs  
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22' 
+
 
     - name: Install dependencies
       run: npm install --global surge
+     
 
     - name: Deploy to Surge
       env:
-        ANDY_SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      run: |
-        npx surge ./ ViannyParcial1.surge.sh --token $SURGE_TOKEN
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      run: surge ./ --domain https://ViannyParcial1.surge.sh.
