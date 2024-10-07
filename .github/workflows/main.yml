@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: npm install
      
-
+      #Deploy
     - name: Deploy to Surge
       env:
         SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
